@@ -1,0 +1,40 @@
+.pagination {
+    font-size: 0;
+
+    &__lst {
+        display: inline-block;
+    }
+
+    &__item {
+        display: inline-block;
+        overflow: hidden;
+        border-radius: 50%;
+        vertical-align: middle;
+        
+        &:hover {
+            background-color: rgba($color: $black-bg, $alpha: 0.08);
+        }
+
+        &--next {
+            .icon-prev {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    &__link {
+        display: block;
+        width: 52px;
+        height: 52px;
+        color: $black-darker;
+        font-size: 18px;
+        line-height: 52px;
+        text-align: center;
+        transition: background-color 0.3s;
+
+        &.on {
+            background-color: $black-darker;
+            color: $white;
+        }
+    }
+}

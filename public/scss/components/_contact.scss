@@ -1,0 +1,196 @@
+.contact {
+    &--type2 {
+        text-align: center;
+
+        .contact {
+            &__info {
+                &-name {
+                    margin-top: 25px;
+                    font-size: 26px;
+                }
+
+                &-content {
+                    margin-top: 20px;
+
+                    &--type2 {
+                        .contact {
+                            &__info {
+                                &-depth2 {
+                                    margin-top: 0;
+                                    padding-top: 0;
+
+                                    &:first-child {
+                                        padding-left: 0;
+                                    }
+
+                                    &:before {
+                                        top: 16px;
+                                        left: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &-depth2 {
+                    margin-top: 13px;
+                    padding-top: 17px;
+                    padding-left: 0;
+                    font-size: 18px;
+                    line-height: 30px;
+
+                    &:first-child {
+                        margin-top: 0;
+                        padding-top: 0;
+
+                        &:before {
+                            display: none;
+                        }
+                    }
+
+                    &:before {
+                        top: 0;
+                        left: 50%;
+                    }
+                }
+            }
+
+            &__form {
+                margin-top: 75px;
+            }
+        }
+    }
+
+    &__info {
+        &-item {
+            margin-top: 26px;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+
+        &-icon {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: solid 1px $black;
+            border-radius: 10px;
+            text-align: center;
+
+            &:before {
+                display: inline-block;
+                height: 100%;
+                vertical-align: middle;
+                content: '';
+            }
+
+            i {
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+
+        &-name {
+            display: block;
+            color: $black-darker;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        &-content {
+            margin-top: 11px;
+
+            &--type2 {
+                font-size: 0;
+
+                .contact {
+                    &__info {
+                        &-depth2 {
+                            display: inline-block;
+                            margin-left: 5px;
+                            padding-left: 9px;
+
+                            &:first-child {
+                                margin-left: 0;
+                                padding-left: 15px;
+
+                                &:before {
+                                    width: 3px;
+                                    height: 3px;
+                                    border-radius: 50%;
+                                }
+                            }
+
+                            &:before {
+                                width: 5px;
+                                height: 1px;
+                                border-radius: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &-depth2 {
+            position: relative;
+            padding-left: 15px;
+            color: $black-lighter;
+            font-size: 16px;
+            line-height: 35px;
+
+            &:before {
+                display: block;
+                position: absolute;
+                left: 0;
+                top: 16px;
+                width: 3px;
+                height: 3px;
+                border-radius: 50%;
+                background-color: rgba($color: $black, $alpha: 0.2);
+                content: '';
+            }
+        }
+
+        &-link {
+            color: $black-lighter;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__form {
+        margin-top: -15px;
+    }
+
+    &__btn {
+        margin-top: 15px;
+        text-align: right;
+    }
+
+    &__map {
+        overflow: hidden;
+        position: relative;
+        margin-top: 100px;
+
+        &:before {
+            display: block;
+            width: 100%;
+            padding-top: 26.04%;
+            content: '';
+        }
+    }
+
+    &__iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+}

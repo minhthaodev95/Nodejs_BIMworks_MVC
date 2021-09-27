@@ -1,0 +1,50 @@
+<%-include('./layouts_admin/header_admin.ejs')-%>
+        <div id="page-wrapper">
+        <div class="col-md-12 graphs">
+	   <div class="xs">
+  	 <div><h3 class="title_page">All Posts</h3>
+      <button type="button" class="btn btn-default">Add Post</button></div>
+
+    <div class="bs-example4" data-example-id="simple-responsive-table">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th> <input type="checkbox" class="custom-control-input" id="tableDefaultCheck1"></th>
+              <th style="width: 50%">Title</th>
+              <th>Author</th>
+              <th>Categories</th>
+              <th>Tags</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% posts.forEach((post) => {%>
+            <tr>
+              <th scope="row"><input type="checkbox" class="custom-control-input" id="tableDefaultCheck1"></th>
+              <td><%= post.title%></td>
+              <td><%= post.authorID.name%></td>
+              <td><%= post.category.name%></td>
+              <td><%= post.tags.map(tag => tag) %></td>
+              <td><%= post.createAt%></td>
+            </tr>
+            <%});%>
+          </tbody>
+        </table>
+      </div><!-- /.table-responsive -->
+    </div>
+    <!-- pagination -->
+    <nav>
+      <ul class="pagination">
+        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+     </ul>
+   </nav>
+   <!-- //pagination -->
+  </div>
+  <%-include('./layouts_admin/footer_admin.ejs')-%>

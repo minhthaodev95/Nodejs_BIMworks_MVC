@@ -1,0 +1,129 @@
+.article {
+    position: relative;
+
+    &:hover {
+        &:after {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .article {
+            &__img {
+                img {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+
+    &:after {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        z-index: -1;
+        width: calc(100% + 30px);
+        height: calc(100% + 30px);
+        border-radius: 8px;
+        background-color: $white;
+        box-shadow: $boxshadow-black;
+        transition: visibility 0.5s, opacity 0.5s;
+        content: '';
+    }
+
+    &--spotlight {
+        .article {
+            &__img {
+                &:after {
+                    padding-top: 42.86%;
+                }
+            }
+        }
+    }
+
+    &__link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+    }
+
+    &__img {
+        overflow: hidden;
+        position: relative;
+        border-radius: 8px;
+        
+        &:after {
+            display: block;
+            padding-top: 56.25%;
+            content: '';
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: transform 0.3s ease-in-out;
+        }
+    }
+
+    &__content {
+        margin-top: 32px;
+        padding-bottom: 15px;
+    }
+
+    &__tags {
+        margin: -5px;
+        font-size: 0;
+    }
+
+    &__tag {
+        display: inline-block;
+        position: relative;
+        z-index: 3;
+        padding: 5px;
+        color: rgba($color: $black-lighter, $alpha: 0.4);
+        font-size: 14px;
+        letter-spacing: -0.05em;
+        line-height: normal;
+
+        &:first-child {
+            &:before {
+                display: none;
+            }
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:before {
+            display: inline-block;
+            position: absolute;
+            bottom: 5px;
+            left: -1px;
+            content: ',';
+        }
+    }
+
+    &__name {
+        display: block;
+        margin-top: 10px;
+        color: $black-darker;
+        font-size: 26px;
+        font-weight: 400;
+        line-height: 36px;
+    }
+
+    &__description {
+        margin-top: 7px;
+        color: rgba($color: $black-lighter, $alpha: 0.7);
+        font-size: 16px;
+        line-height: 24px;
+    }
+}

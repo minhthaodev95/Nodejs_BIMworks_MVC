@@ -1,0 +1,133 @@
+.project-box {
+    position: relative;
+
+    &:hover {
+        &:after {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    &:after {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        z-index: -1;
+        width: calc(100% + 30px);
+        height: calc(100% + 30px);
+        border-radius: 8px;
+        background-color: $white;
+        box-shadow: $boxshadow-black;
+        transition: visibility 0.5s, opacity 0.5s;
+        content: '';
+    }
+
+    &--spotlight {
+        .project-box {
+            &__img {
+                &:after {
+                    padding-top: 42.86%;
+                }
+            }
+        }
+    }
+
+    &__link {
+        display: block;
+        overflow: hidden;
+        position: relative;
+        border-radius: 8px;
+
+        &:hover {
+            .project-box {
+                &__content {
+                    bottom: 0;
+                }
+
+                &__img {
+                    img {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
+
+    &__content {
+        position: absolute;
+        bottom: -48px;
+        left: 0;
+        z-index: 3;
+        width: 100%;
+        padding: 30px;
+        transition: bottom 0.3s ease-in-out;
+    }
+
+    &__name {
+        color: $white;
+        font-size: 26px;
+        font-weight: 400;
+        line-height: 36px;
+    }
+
+    &__description {
+        margin-top: 7px;
+        color: rgba($color: $white, $alpha: 0.9);
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    &__btn-viewmore {
+        display: inline-block;
+        position: relative;
+        margin-top: 30px;
+        padding-left: 24px;
+        color: $white;
+        font-size: 18px;
+
+        &:before {
+            display: block;
+            position: absolute;
+            top: 8px;
+            left: 0;
+            width: 15px;
+            height: 1px;
+            background-color: $white;
+            content: '';
+        }
+    }
+
+    &__img {
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        font-size: 0;
+
+        &:before {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            background-color: rgba($color: $black, $alpha: 0.3);
+            content: '';
+        }
+
+        &:after {
+            display: block;
+            padding-top: 100%;
+            content: '';
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.3s ease-in-out;
+        }
+    }
+}

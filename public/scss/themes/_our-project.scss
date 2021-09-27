@@ -1,0 +1,28 @@
+.project {
+    &__list {
+        margin-top: -15px;
+        margin-bottom: -15px;
+    }
+
+    &__item {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    &__pagination {
+        margin-top: 80px;
+        text-align: center;
+    }
+
+    &__related {
+        margin-top: -15px;
+        margin-bottom: -15px;
+    }
+
+    &__content {
+        color: $black-lighter;
+        font-family: $roboto;
+        font-size: 18px;
+        line-height: 30px;
+    }
+}

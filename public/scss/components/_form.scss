@@ -1,0 +1,52 @@
+.input,
+.textarea {
+    display: block;
+    width: 100%;
+    padding: 15px 20px 14px 20px;
+    border: solid 1px rgba($color: $black, $alpha: 0.1);
+    border-radius: 6px;
+    outline: none;
+    color: $black-darker;
+    font-family: $roboto;
+    font-size: 18px;
+    font-weight: 400;
+
+    &:focus,
+    &:active {
+        border-color: $black-darker;
+    }
+
+    &::-webkit-input-placeholder {
+        color: $black-lighter;
+        font-size: 18px;
+    }
+
+    &::-moz-placeholder {
+        color: $black-lighter;
+        font-size: 18px;
+    }
+
+    &:-ms-input-placeholder {
+        color: $black-lighter;
+        font-size: 18px;
+    }
+
+    &:-moz-placeholder {
+        color: $black-lighter;
+        font-size: 18px;
+    }
+
+    &__wrap {
+        padding: 15px 0;
+    }
+}
+
+.textarea {
+    overflow: auto;
+    height: 100%;
+    resize: none;
+
+    &__wrap {
+        height: 186px;
+    }
+}

@@ -1,0 +1,33 @@
+.breadcrumb {
+    display: block;
+    margin: auto;
+    font-size: 0;
+    text-align: center;
+
+    &__item {
+        display: inline-block;
+        color: rgba($color: $white, $alpha: 0.7);
+        font-size: 16px;
+        line-height: 26px;
+
+        &:before {
+            display: inline-block;
+            margin: 0 10px;
+            content: '/';
+        }
+
+        &:first-child {
+            &:before {
+                display: none;
+            }
+        }
+    }
+
+    &__link {
+        color: rgba($color: $white, $alpha: 0.7);
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

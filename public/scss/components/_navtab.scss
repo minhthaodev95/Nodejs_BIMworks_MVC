@@ -1,0 +1,122 @@
+.navtab {
+    position: relative;
+    z-index: 200;
+    text-align: center;
+
+    &__list {
+        display: inline-block;
+        border-radius: 6px;
+        box-shadow: $boxshadow-black;
+        font-size: 0;
+        text-align: center;
+
+        &-depth2 {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            top: calc(100% + 45px);
+            left: 0;
+            z-index: 200;
+            width: 230px;
+            padding: 30px 10px;
+            border-radius: 6px;
+            box-shadow: $boxshadow-black;
+            background-color: $white;
+            text-align: left;
+            transition: visibility 0.3s, opacity 0.3s, top 0.3s;
+        }
+    }
+
+    &__item {
+        display: inline-block;
+        position: relative;
+
+        &:hover {
+            .navtab {
+                &__list {
+                    &-depth2 {
+                        visibility: visible;
+                        opacity: 1;
+                        top: calc(100% + 15px);
+                    }
+                }
+            }
+        }
+    }
+
+    &__link {
+        &:after {
+            display: block;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 230px;
+            height: 30px;
+            content: '';
+        }
+
+        &.on {
+            border-color: $black-bg;
+            background-color: $black-bg;
+            color: $white;
+
+            .navtab {
+                &__link {
+                    &-text {
+                        &:after {
+                            background-image: url(../img/icons/icon_triangle_down.png);
+                        }
+                    }
+                }
+            }
+        }
+
+        &-text {
+            display: inline-block;
+        }
+
+        &--arrow {
+            .navtab {
+                &__link {
+                    &-text {
+                        position: relative;
+                        padding-right: 20px;
+
+                        &:after {
+                            display: inline-block;
+                            position: absolute;
+                            top: 6px;
+                            right: 0;
+                            width: 10px;
+                            height: 5px;
+                            background: url(../img/icons/icon_triangle_down_black.png) no-repeat;
+                            background-size: 100% auto;
+                            content: '';
+                        }
+                    }
+                }
+            }
+        }
+
+        &-depth2 {
+            display: block;
+            padding: 0 20px;
+            color: $black-lighter;
+            font-size: 15px;
+            line-height: 35px;
+
+            &:hover {
+                background-color: rgba($color: $black-bg, $alpha: 0.08);
+            }
+        }
+    }
+
+    &__content {
+        margin-top: 80px;
+        text-align: left;
+
+        &-item {
+            display: none;
+        }
+    }
+}

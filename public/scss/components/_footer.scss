@@ -1,0 +1,117 @@
+.footer {
+    font-size: 0;
+
+    &__wrap {
+        padding: 100px 0;
+    }
+
+    &__logo {
+        display: inline-block;
+        width: 170px;
+        padding-top: 20px;
+    }
+
+    &__link {
+        display: block;
+    }
+
+    &-info {
+        &__name {
+            color: $black-darker;
+            font-size: 42px;
+            line-height: 52px;
+        }
+
+        &__list {
+            margin-top: 13px;
+            color: $black-lighter;
+            font-size: 16px;
+            line-height: 35px;
+        }
+
+        &__item {
+            position: relative;
+            padding-left: 30px;
+
+            &:before {
+                display: inline-block;
+                position: absolute;
+                top: calc(34px / 2);
+                left: 0;
+                transform: translateY(-50%);
+                width: 30px;
+                height: 14px;
+                background-repeat: no-repeat;
+                background-size: auto 100%;
+                content: '';
+            }
+
+            &--address {
+                &:before {
+                    background-image: url(../img/icons/icon_address.png);
+                }
+            }
+
+            &--phone {
+                &:before {
+                    background-image: url(../img/icons/icon_phone.png);
+                }
+            }
+
+            &--mail {
+                &:before {
+                    background-image: url(../img/icons/icon_mail.png);
+                }
+            }
+        }
+
+        &__phone {
+            font-size: 0;
+            line-height: normal;
+
+            &-item {
+                display: inline-block;
+                position: relative;
+                margin-left: 5px;
+                padding-left: 9px;
+                font-size: 16px;
+                line-height: 35px;
+
+                &:first-child {
+                    margin-left: 0;
+                    padding-left: 0;
+
+                    &:before {
+                        display: none;
+                    }
+                }
+
+                &:before {
+                    display: inline-block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    line-height: 35px;
+                    content: '-';
+                }
+            }
+        }
+
+        &__link {
+            color: $black-lighter;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.copyright {
+    height: 80px;
+    background-color: $black-darker;
+    color: rgba($color: $white, $alpha: 0.7);
+    font-size: 16px;
+    line-height: 80px;
+    text-align: center;
+}

@@ -1,0 +1,81 @@
+.contact-floating {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    z-index: 200;
+
+    &:hover {
+        .contact-floating {
+            &__tooltip {
+                visibility: visible;
+                opacity: 1;
+                top: -72px;
+            }
+        }
+    }
+
+    &__btn {
+        display: block;
+        position: relative;
+        z-index: 2;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: $white;
+        box-shadow: $boxshadow-black;
+        font-size: 0;
+    }
+
+    &__icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__tooltip {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: -57px;
+        right: 0;
+        z-index: 1;
+        padding: 19px 30px 18px;
+        border-radius: 6px;
+        background-color: $white;
+        box-shadow: $boxshadow-black;
+        color: $black-lighter;
+        font-size: 15px;
+        white-space: nowrap;
+        transition: visibility 0.3s, opacity 0.3s, top 0.3s;
+
+        &:before {
+            display: block;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: transparent;
+            content: '';
+        }
+
+        &:after {
+            display: block;
+            position: absolute;
+            top: 100%;
+            right: 26px;
+            z-index: 2;
+            width: 0;
+            height: 0;
+            border-left: solid 8px transparent;
+            border-right: solid 8px transparent;
+            border-top: solid 8px $white;
+            content: '';
+        }
+    }
+
+    &__number {
+        font-weight: 700;
+    }
+}

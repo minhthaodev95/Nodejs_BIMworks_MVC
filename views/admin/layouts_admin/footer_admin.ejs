@@ -1,0 +1,86 @@
+<div class="copy">
+    <p>Copyright &copy; 2021 BIMworks. All Rights Reserved | Design by <a href="http://facebook.com/minhthaodev95" target="_blank">MinhThao</a> </p>
+</div>
+</div>
+</div>
+<!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+<!-- Bootstrap Core JavaScript -->
+<link href="css/custom.css" rel="stylesheet">
+<script type="text/javascript">
+  
+        
+            
+        
+        ClassicEditor
+				.create( document.querySelector( '#editor' ), {
+                ckfinder : {
+                    uploadUrl: 'http://localhost:3000/upload?command=QuickUpload&type=Images&responseType=json',
+                    },
+					
+				toolbar: {
+					items: [
+						'heading',
+						'|',
+						'bold',
+						'italic',
+						'link',
+						'bulletedList',
+						'numberedList',
+						'|',
+						'outdent',
+						'indent',
+						'|',
+						'imageUpload',
+						'blockQuote',
+						'insertTable',
+						'mediaEmbed',
+						'undo',
+						'redo'
+					]
+				},
+				language: 'en',
+				
+				table: {
+					contentToolbar: [
+						'tableColumn',
+						'tableRow',
+						'mergeTableCells'
+					]
+				},
+				image : {
+                    
+                    toolbar: [
+                    'imageStyle:block',
+                    'imageStyle:side',
+                    '|',
+                    'toggleImageCaption',
+                    'imageTextAlternative',
+                    '|',
+                    'linkImage'
+                        ]
+                    
+                }
+					
+					
+					
+				} )
+				.then( editor => {
+					window.editor = editor.getData();
+				} )
+				.catch( error => {
+					console.error( 'Oops, something went wrong!' );
+					console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+					console.warn( 'Build id: 5akoeqkp05on-nohdljl880ze' );
+					console.error( error );
+				} );
+
+       
+</script>
+<script src="js/custom_admin.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/metisMenu.min.js"></script>
+<script src="js/custom.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<%-include('./layouts_admin/header_admin.ejs')-%>
+<div id="page-wrapper">
+    <div class="graphs">
+     <div class="md">
+         <h3>Add New Post</h3>
+        <form action="/admin/add-post" method="POST" enctype="multipart/form-data">
+
+        <!-- //compose -->
+                <div class="col-md-10"> 
+                        <div class="form-group" for="focusedinput">
+                            <input name="title" type="text" class="form-control1" id="focusedinput" placeholder="Add Title">
+                        </div>
+                    <div class="form-group">
+                        <textarea name="content"  id="editor"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="txtarea1" cols="50" rows="4" class="form-control1" placeholder="Expert" name="expert"></textarea>
+                    </div>
+            </div>
+             <!-- //compose -->
+        <!-- col 4 -->
+             <div class="col-md-2">
+                <div class="form_submit_button">
+                            <button class="btn-info btn" type="submit">Submit</button>
+                            <button class="btn-danger btn">Cancel</button>
+                            <button class="btn-default btn">Reset</button>
+                 </div>
+                <div class="categories_checkbox">
+                    <div class="form-group">
+                        <label for="checkbox" class=" control-label"><strong>Categories</strong></label>
+                        <div class="">
+                            <% categories.forEach((category) => {%>
+                            <div class="checkbox-inline1"><label><input type="checkbox" name="category" value=<%=category._id%>> <%=category.name%></label></div>
+                            <%});%>
+                        </div>
+                    </div>
+                </div>
+                <div class="tags_list">
+                    <div class="form-group">
+                        <label for="exampleInputFile"><strong>Tags List</strong></label>
+                        <div class="form-group">
+                            <input  type="text" class="form-control2 tag" id="focusedinput" placeholder="Add Tag">
+                            <input name="tags" type="text" class="form-control2 tagsValue" id="focusedinput" hidden>
+                            <button type="button" class="btn btn-xs btn-default addTags" onclick="getInputValue();">Add</button>
+                       </div>
+                        <h5 id="displayTags">
+                          </h5>
+                    </div>
+                </div>
+                
+                <div class="feature_images">
+                    <div class="form-group">
+                        <label for="exampleInputFile"><h5><strong>Feature Image</strong></h5></label>
+                        <input type="file" id="exampleInputFile" name="fileInput">
+                    </div>
+                </div>
+                <div class="author_field">
+                    <div class="form-group">
+                        <label for="author"><strong>Author</strong></label>
+                        <div class="form-group">
+                            <input name="author" type="text" class="form-control2" id="focusedinput" hidden  value="61514d05f3dc0487a87dafe6">
+                            <h3><span class="tags_item label label-danger">minhthao.dev95</span></h3>
+                       </div>
+                    </div>
+                </div>
+            </div>
+                
+        <!-- //cool 4  -->
+        </form>
+     <div class="clearfix"> </div>
+</div>
+      <%-include('./layouts_admin/footer_admin.ejs')-%>    
