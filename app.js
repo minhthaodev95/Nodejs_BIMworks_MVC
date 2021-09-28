@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users.route');
 let Author = require('./models/author.model')
 let Post = require('./models/post.model')
 let Category = require('./models/category.model')
+let Image = require('./models/image.model')
 
 var app = express();
 app.use(bodyParser.urlencoded({
@@ -32,6 +33,8 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/admin', usersRouter);
+/* GET Login . */
+
 app.post('/upload', MultipartyMiddleware, (req, res) => {
   
   var TempFile = req.files.upload;
@@ -41,8 +44,11 @@ app.post('/upload', MultipartyMiddleware, (req, res) => {
     pathImageArr.shift();
     pathImageArr.unshift('');
     var path = pathImageArr.join('/');
+    const image = new Image({
+      urlUpload : path
+    });
 
-
+    image.save();
       res.status(200).json({
        uploaded: true,
         url: `${path}`

@@ -13,10 +13,7 @@ let postSchema = new mongoose.Schema({
     tags : {
         type : []
     },
-    image : {
-        type : []
-    },
-    featureInmage : {
+    featureImage : {
         type : String
     },
     category : {

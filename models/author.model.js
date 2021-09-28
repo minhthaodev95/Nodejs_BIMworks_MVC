@@ -9,6 +9,11 @@ let authorSchema = mongoose.Schema({
     age : {
         type : Number
     },
+    gender : {
+        type :  String,
+        enum : ['male', 'female'],
+        
+    },
     email : {
         type   : String,
         required : [true, "Please provide me your email!"],
@@ -16,11 +21,19 @@ let authorSchema = mongoose.Schema({
         lowercase : true,
         validate : [validator.isEmail, 'Please provide a valid email !']
     },
+    username : {
+        type :String,
+        required : [true , 'User must have a username']
+    },
     password : {
         type : String,
         required : [true, 'User must have a password !' ],
     },
     photo : {
+        type : String,
+        default: ''
+    },
+    address : {
         type : String
     },
     role : {
@@ -33,17 +46,6 @@ let authorSchema = mongoose.Schema({
    
 
 const Author = mongoose.model('Author', authorSchema);
-
-// Author.create({
-//     name : 'Minh Thao',
-//     age : 25,
-//     email : 'minhthao.dev95@gmail.com',
-//     password : 'password',
-//     photo : 'linktophoto',
-//     role : 'admin',
-
-// })
-
 
 
 module.exports = Author;

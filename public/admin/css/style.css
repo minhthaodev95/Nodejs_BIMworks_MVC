@@ -18,6 +18,11 @@ html, body{
 .ck-editor__editable {
   min-height: 500px;
 }
+.avatarAdmin{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
 .tags_item{
   margin-right: 5px;
 }

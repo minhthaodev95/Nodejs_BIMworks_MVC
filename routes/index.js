@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+let Author = require('../models/author.model')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -45,7 +46,39 @@ router.get('/recruitment-detail', function(req, res, next) {
   res.render('recruitment-detail', {title : 'Recruitment Detail Page'});
 });
 
+// login and register
+router.get('/login', function(req, res, next) {
+  res.render('admin/login_admin');
+});
+/* GET Register. */
+router.get('/register', function(req, res, next) {
+  res.render('admin/register_admin');
+});
+/* POST Register. */
+router.post('/register', function(req, res, next)  {
+    let name = req.body.name;
+    let age = req.body.age;
+    let gender = req.body.gender;
+    let email = req.body.email;
+    let username = req.body.username;
+    let password = req.body.password;
+    let address = req.body.address;
 
+    const author =  Author({
+      name : name,
+      age : parseInt(age),
+      gender : gender,
+      email :email,
+      username : username,
+      password : password,
+      address : address
+    });
+     author.save();
+    console.log(req.body);
+    res.redirect('/register');
+  
+
+});
 
 
 
