@@ -96,5 +96,8 @@ router.get('/users', function(req, res, next) {
   .then(users =>   res.render('admin/users_admin' , {users : users}));
 
 });
+router.get('/add-users', function(req, res, next) {
+    res.render('admin/add_user');
+});
 
 module.exports = router;
