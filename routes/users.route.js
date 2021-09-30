@@ -3,6 +3,7 @@ var router = express.Router();
 const multer =  require('multer');
 var path = require('path')
 global.crypto = require('crypto')
+var slugify = require('slugify')
 
 
 
@@ -52,17 +53,17 @@ router.post('/add-post',upload.single('fileInput'), function(req, res, next) {
     const image = new Image({
       urlUpload : pathImage
     });
-
-    console.log(req.body);
+    image.save();
 
   let title = req.body.title || '';
-  let content = req.body.title || '';
+  let content = req.body.content || '';
   let expert = req.body.expert || '';
   let tags = req.body.tags || '';
   let author = req.body.author || '';
   let featureImage = pathImage || '/upload/default_avatar.jpg';
   let category = req.body.category || '';
-
+  let url = slugify(req.body.title);
+  console.log(url)
   const post = new Post({
     title : title,
     expert : expert,
@@ -71,6 +72,7 @@ router.post('/add-post',upload.single('fileInput'), function(req, res, next) {
     category : category,
     authorID : author,
     body : content,
+    url : url
   });
   post.save();
   res.redirect('/admin/add-post');  

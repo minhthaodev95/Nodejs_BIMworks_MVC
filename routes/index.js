@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-let Author = require('../models/author.model')
+let Author = require('../models/author.model');
+const Post = require('../models/post.model');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -35,6 +36,13 @@ router.get('/project-list', function(req, res, next) {
 //GET projec-list-detail
 router.get('/project-detail', function(req, res, next) {
   res.render('project-detail', {title : 'Project Detail Page'});
+});
+//GET projec-list-detail
+router.get('/du-an/:category/:url', function(req, res, next) {
+  Post.findOne({url : req.params.url}).populate('category').populate('authorID')
+  .then(posts =>   res.render('project-detail' , {posts : posts})
+  );
+  
 });
 //GET recruitment-list
 router.get('/recruitment-list', function(req, res, next) {

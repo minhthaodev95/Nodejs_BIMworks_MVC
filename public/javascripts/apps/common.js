@@ -12,6 +12,7 @@
             clearTimeout(timeOut);
         }, 2000);
     };
+    
 
     var header = function() {
         var $header = $('#header');
@@ -120,3 +121,4 @@
     });
 
 })(window, window.jQuery);
+

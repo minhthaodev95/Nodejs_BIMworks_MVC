@@ -18,8 +18,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 
-
-
 const MultipartyMiddleware = multiparty({uploadDir : './public/upload'})
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

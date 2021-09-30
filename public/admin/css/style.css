@@ -16,7 +16,7 @@ html, body{
   	overflow-x: hidden;
 }
 .ck-editor__editable {
-  min-height: 500px;
+  min-height: 550px;
 }
 .avatarAdmin{
   height: 30px;

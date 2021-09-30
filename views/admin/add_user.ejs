@@ -8,12 +8,33 @@
 
 <div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
             <div class="panel-body no-padding">
-                <table class="table table-striped">
+                <form class="form-signin app-cam" action="/add-user" method="POST">
+                    <p>Enter your personal details below</p>
+                     <input type="text" class="form-control1" placeholder="Full Name" autofocus="" name="name">
+                     <input type="text" class="form-control1" placeholder="Age" autofocus="" name="age">
+                    <input type="text" class="form-control1" placeholder="Address" autofocus="" name="address">
+                    <input type="text" class="form-control1" placeholder="Email" autofocus="" name="email">
+                    <input type="text" class="form-control1" placeholder="City/Town" autofocus="" name="city">
+                    <div class="radios">
+                      <label for="radio-01" class="label_radio">
+                          <input type="radio" name="gender" checked value="male"> Male
+                      </label>
+                      <label for="radio-02" class="label_radio">
+                          <input type="radio" name="gender" value="female"> Female
+                      </label>
+                    </div>
+                    <p> Enter your account details below</p>
+                    <input type="text" class="form-control1" placeholder="User Name" autofocus="" name="username">
+                    <input type="password" class="form-control1" placeholder="Password" name="password">
+                    <input type="password" class="form-control1" placeholder="Re-type Password" name="retypePass">
+                    <label class="checkbox-custom check-success">
+                        <input type="checkbox" value="agree this condition" id="checkbox1"> <label for="checkbox1">I agree to the Terms of Service and Privacy Policy</label>
+                    </label>
+                    <button class="btn btn-lg btn-success1 btn-block" type="submit">Add user</button>
                     
-                </table>
+                </form>
             </div>
 </div>
-
 
 </div>
 </div>
