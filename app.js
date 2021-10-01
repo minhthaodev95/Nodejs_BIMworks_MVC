@@ -31,7 +31,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
-app.use('/admin', usersRouter);
+app.use('/admin',async (req, res, next) => {
+  let user = await Author.findOne({id : '6152d90fb037d9754af94057'}).then(user => user);
+  req.userAdmin =  user
+  next();
+}, usersRouter);
 /* GET Login . */
 
 app.post('/upload', MultipartyMiddleware, (req, res) => {

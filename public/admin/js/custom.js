@@ -3,6 +3,13 @@ $(function() {
     $('#side-menu').metisMenu();
 
 });
+$('#addPostFrom').on('keyup keypress', function(e) {
+    var keyCode = e.keyCode || e.which;
+    if (keyCode === 13) { 
+      e.preventDefault();
+      return false;
+    }
+  });
 function resetFunction() {
     document.getElementById("addPostFrom").reset();
   }

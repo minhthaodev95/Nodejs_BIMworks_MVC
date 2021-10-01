@@ -31,20 +31,20 @@ const upload = multer({ storage: storage })
 
 /* GET admin dashboard. */
 router.get('/', function(req, res, next) {
-  res.render('admin/index_admin');
+  res.render('admin/index_admin', {userAdmin : req.userAdmin});
 });
 
 /* GET posts listing. */
 router.get('/posts', function(req, res, next) {
   Post.find().populate('category').populate('authorID')
-  .then(posts =>   res.render('admin/posts_admin' , {posts : posts})
+  .then(posts =>   res.render('admin/posts_admin' , {posts : posts, userAdmin : req.userAdmin})
   );
 });
 /* GET add post . */
 router.get('/add-post', async function(req, res, next) {
   let categories = await Category.find().then(categories =>   categories);
   let parentCategories = await ParentCategory.find().then(parentCategories =>   parentCategories);
-  res.render('admin/addpost_admin' , {categories : categories, parentCategories : parentCategories}
+  res.render('admin/addpost_admin' , {categories : categories, parentCategories : parentCategories, userAdmin : req.userAdmin}
   );
 });
 
@@ -52,7 +52,7 @@ router.get('/add-post', async function(req, res, next) {
 router.get('/add-new-category', async (req, res, next) => {
   let categories = await Category.find().then(categories =>   categories);
   let parentCategories = await ParentCategory.find().then(parentCategories =>   parentCategories);
-  res.render('admin/add_new_category_admin' , {categories : categories, parentCategories : parentCategories}
+  res.render('admin/add_new_category_admin' , {categories : categories, parentCategories : parentCategories, userAdmin : req.userAdmin}
   );
 })
 router.post('/add-new-category',  (req, res, next) => {
@@ -96,7 +96,6 @@ router.post('/add-post',upload.single('fileInput'), function(req, res, next) {
   let url = slugify(req.body.title);
   let  postType= slugify(req.body.postType);
   let parentCategory = slugify(req.body.parentCategory);
-  console.log(url)
   const post = new Post({
     title : title,
     expert : expert,
@@ -115,26 +114,43 @@ router.post('/add-post',upload.single('fileInput'), function(req, res, next) {
 
 
 /* GET all media . */
-router.get('/media-library', function(req, res, next) {
-  res.render('admin/media_admin');
+router.get('/media-library', async function(req, res, next) {
+  let images = await Image.find().then(images => images);
+  res.render('admin/media_admin', {images :images, userAdmin : req.userAdmin});
+});
+/* GET add-new-media  . */
+router.get('/add-new-media',  function(req, res, next) {
+  res.render('admin/add_media_admin', {userAdmin : req.userAdmin});
+});
+/* POST add-new-media  . */
+router.post('/add-new-media',upload.single('newImage'),  async function(req, res, next) {
+  var pathImageArr = req.file.path.split('/');
+    pathImageArr.shift();
+    pathImageArr.unshift('');
+    var pathImage = pathImageArr.join('/');
+    const image = await Image({
+      urlUpload : pathImage
+    });
+     image.save();
+    res.redirect('/admin/media-library');
 });
 /* GET mailbox  . */
 
 router.get('/mailbox', function(req, res, next) {
-  res.render('admin/mailbox_admin');
+  res.render('admin/mailbox_admin', {userAdmin : req.userAdmin});
 });
 router.get('/mailbox-compose', function(req, res, next) {
-  res.render('admin/mailbox_compose_admin');
+  res.render('admin/mailbox_compose_admin', {userAdmin : req.userAdmin});
 });
 /* GET users  . */
 
 router.get('/users', function(req, res, next) {
   Author.find()
-  .then(users =>   res.render('admin/users_admin' , {users : users}));
+  .then(users =>   res.render('admin/users_admin' , {users : users, userAdmin : req.userAdmin}));
 
 });
 router.get('/add-users', function(req, res, next) {
-    res.render('admin/add_user');
+    res.render('admin/add_user', {userAdmin : req.userAdmin});
 });
 
 module.exports = router;
