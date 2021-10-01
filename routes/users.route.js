@@ -37,7 +37,7 @@ router.get('/', function(req, res, next) {
 /* GET posts listing. */
 router.get('/posts', function(req, res, next) {
   Post.find().populate('category').populate('authorID')
-  .then(posts =>   res.render('admin/posts_admin' , {posts : posts, userAdmin : req.userAdmin})
+  .then(posts =>   res.render('admin/posts_admin' , {posts : posts.reverse(), userAdmin : req.userAdmin})
   );
 });
 /* GET add post . */
@@ -77,7 +77,9 @@ router.post('/add-new-category',  (req, res, next) => {
 // POST add post
 
 router.post('/add-post',upload.single('fileInput'), function(req, res, next) {
-  var pathImageArr = req.file.path.split('/');
+
+  if(req.file){
+    var pathImageArr = req.file.path.split('/');
     pathImageArr.shift();
     pathImageArr.unshift('');
     var pathImage = pathImageArr.join('/');
@@ -85,17 +87,18 @@ router.post('/add-post',upload.single('fileInput'), function(req, res, next) {
       urlUpload : pathImage
     });
     image.save();
+  }
 
-  let title = req.body.title || '';
-  let content = req.body.content || '';
-  let expert = req.body.expert || '';
-  let tags = req.body.tags || '';
-  let author = req.body.author || '';
-  let featureImage = pathImage || '/upload/default_avatar.jpg';
-  let category = req.body.category || '';
+  let title = req.body.title ;
+  let content = req.body.content;
+  let expert = req.body.expert;
+  let tags = req.body.tags? req.body.tags : null;
+  let author = req.body.author ;
+  let featureImage = pathImage? pathImage : '/upload/default_avatar.jpg';
+  let category = req.body.category? req.body.category : null ;
   let url = slugify(req.body.title);
   let  postType= slugify(req.body.postType);
-  let parentCategory = slugify(req.body.parentCategory);
+  let parentCategory = req.body.parentCategory? req.body.parentCategory : null;
   const post = new Post({
     title : title,
     expert : expert,
@@ -108,6 +111,7 @@ router.post('/add-post',upload.single('fileInput'), function(req, res, next) {
     type : postType,
     parentCategory : parentCategory
   });
+  console.log(post);
   post.save();
   res.redirect('/admin/add-post');  
 })

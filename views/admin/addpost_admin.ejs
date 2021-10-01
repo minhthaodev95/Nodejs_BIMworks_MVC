@@ -8,13 +8,13 @@
         <!-- //compose -->
                 <div class="col-md-10"> 
                         <div class="form-group" for="focusedinput">
-                            <input name="title" type="text" class="form-control1" id="focusedinput" placeholder="Add Title">
+                            <input name="title" type="text" class="form-control1" id="focusedinput" placeholder="Add Title" required>
                         </div>
                     <div class="form-group">
                         <textarea name="content"  id="editor" ></textarea>
                     </div>
                     <div class="form-group">
-                        <textarea id="txtarea1" cols="50" rows="4" class="form-control1" placeholder="Expert" name="expert"></textarea>
+                        <textarea id="txtarea1" cols="50" rows="4" class="form-control1" placeholder="Expert" name="expert" required></textarea>
                     </div>
             </div>
              <!-- //compose -->
@@ -22,7 +22,7 @@
              <div class="col-md-2">
                 <div class="form_submit_button">
                             <button class="btn-info btn" type="submit">Submit</button>
-                            <button class="btn-danger btn">Cancel</button>
+                            <a href="/admin/posts"><button class="btn-danger btn" type="button" >Cancel</button></a>
                             <input class="btn-default btn" onclick="resetFunction()" type="button" value="Reset">
                  </div>
                 <div class="categories_checkbox">
@@ -30,10 +30,10 @@
                         <label for="checkbox" class=" control-label"><strong>Post Type</strong></label>
                         <div class="radios">
                             <label for="radio-01" class="label_radio">
-                                <input type="radio" name="postType" checked value="project"> Project
+                                <input type="radio" name="postType" checked value="Project"> Project
                             </label>
                             <label for="radio-02" class="label_radio">
-                                <input type="radio" name="postType" value="article"> Article
+                                <input type="radio" name="postType" value="Article"> Article
                             </label>
                           </div>
                     </div>

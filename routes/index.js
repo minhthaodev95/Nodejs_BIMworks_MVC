@@ -38,9 +38,14 @@ router.get('/project-detail', function(req, res, next) {
   res.render('project-detail', {title : 'Project Detail Page'});
 });
 //GET projec-list-detail
-router.get('/du-an/:category/:url', function(req, res, next) {
-  Post.findOne({url : req.params.url}).populate('category').populate('authorID')
+router.get('/project/:category/:url', function(req, res, next) {
+  Post.findOne({url : req.params.url, type : 'Project'}).populate('category').populate('authorID')
   .then(posts =>   res.render('project-detail' , {posts : posts})
+  );
+});
+router.get('/article/:url', function(req, res, next) {
+  Post.findOne({url : req.params.url, type : 'Article'}).populate('authorID')
+  .then(posts =>   res.render('news-detail' , {posts : posts})
   );
   
 });

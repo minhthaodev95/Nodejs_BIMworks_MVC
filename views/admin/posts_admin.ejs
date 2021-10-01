@@ -44,9 +44,10 @@
           <thead>
             <tr>
               <th> <input type="checkbox" class="custom-control-input" id="tableDefaultCheck1"></th>
-              <th style="width: 50%">Title</th>
+              <th style="width: 40%">Title</th>
               <th>Author</th>
               <th>Categories</th>
+              <th>Type</th>
               <th>Tags</th>
               <th>Date</th>
               <th>Detail</th>
@@ -59,10 +60,16 @@
               <th scope="row"><input type="checkbox" class="custom-control-input" id="tableDefaultCheck1"></th>
               <td><%= post.title%></td>
               <td><%= post.authorID.name%></td>
-              <td><%= post.category.name%></td>
-              <td><%= post.tags.map(tag => tag) %></td>
+              <td><%= post.category ? post.category.name : "None" %></td>
+              <td><%= post.type%></td>
+              <td><%= post.tags ? post.tags.map(tag => tag) : "None" %></td>
               <td><%= post.createAt%></td>
-              <td><a href="/du-an/<%= removeVietnameseTones(post.category.name).toLowerCase() %>/<%= post.url%>">View</a></td>
+              <% if (post.type == 'Project') {%>
+              <td><a href="/<%= removeVietnameseTones(post.type).toLowerCase()%>/<%= removeVietnameseTones(post.category.name).toLowerCase() %>/<%= post.url%>">View</a></td>
+              <%} else {%>
+              <td><a target="_blank" href="/<%= removeVietnameseTones(post.type).toLowerCase()%>/<%= post.url%>">View</a></td>
+              <%}%>
+
             </tr>
             <%});%>
           </tbody>

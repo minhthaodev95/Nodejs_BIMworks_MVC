@@ -26,7 +26,7 @@ let postSchema = new mongoose.Schema({
     },
     type: {
         type :String,
-        enum : ['project' , 'article']
+        enum : ['Project' , 'Article']
     },
     authorID : {
         type : mongoose.Schema.Types.ObjectId,
