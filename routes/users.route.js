@@ -10,6 +10,8 @@ var slugify = require('slugify')
 let Post = require('../models/post.model')
 let Image = require('../models/image.model')
 let Category = require('../models/category.model')
+let ParentCategory = require('../models/parent_category.model')
+
 let Author = require('../models/author.model');
 const { timeEnd } = require('console');
 
@@ -39,10 +41,39 @@ router.get('/posts', function(req, res, next) {
   );
 });
 /* GET add post . */
-router.get('/add-post', function(req, res, next) {
-  Category.find().then(categories =>   res.render('admin/addpost_admin' , {categories : categories})
+router.get('/add-post', async function(req, res, next) {
+  let categories = await Category.find().then(categories =>   categories);
+  let parentCategories = await ParentCategory.find().then(parentCategories =>   parentCategories);
+  res.render('admin/addpost_admin' , {categories : categories, parentCategories : parentCategories}
   );
 });
+
+//GET add new category
+router.get('/add-new-category', async (req, res, next) => {
+  let categories = await Category.find().then(categories =>   categories);
+  let parentCategories = await ParentCategory.find().then(parentCategories =>   parentCategories);
+  res.render('admin/add_new_category_admin' , {categories : categories, parentCategories : parentCategories}
+  );
+})
+router.post('/add-new-category',  (req, res, next) => {
+  if(req.body.categoryName) {
+    let category = new Category({
+      name : req.body.categoryName
+    });
+    category.save();
+    res.redirect('/admin/add-new-category')
+  }
+  if(req.body.parentCategoryName) {
+    let parentCategory = new ParentCategory({
+      name : req.body.parentCategoryName
+    });
+    parentCategory.save();
+    res.redirect('/admin/add-new-category')
+  }
+  res.redirect('/admin/add-new-category')
+
+})
+
 // POST add post
 
 router.post('/add-post',upload.single('fileInput'), function(req, res, next) {
@@ -63,6 +94,8 @@ router.post('/add-post',upload.single('fileInput'), function(req, res, next) {
   let featureImage = pathImage || '/upload/default_avatar.jpg';
   let category = req.body.category || '';
   let url = slugify(req.body.title);
+  let  postType= slugify(req.body.postType);
+  let parentCategory = slugify(req.body.parentCategory);
   console.log(url)
   const post = new Post({
     title : title,
@@ -72,7 +105,9 @@ router.post('/add-post',upload.single('fileInput'), function(req, res, next) {
     category : category,
     authorID : author,
     body : content,
-    url : url
+    url : url,
+    type : postType,
+    parentCategory : parentCategory
   });
   post.save();
   res.redirect('/admin/add-post');  

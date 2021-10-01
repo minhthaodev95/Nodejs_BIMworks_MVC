@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users.route');
 let Author = require('./models/author.model')
 let Post = require('./models/post.model')
 let Category = require('./models/category.model')
+let ParentCategory = require('./models/parent_category.model')
 let Image = require('./models/image.model')
 
 var app = express();

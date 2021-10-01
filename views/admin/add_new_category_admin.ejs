@@ -1,0 +1,54 @@
+<%-include('./layouts_admin/header_admin.ejs')-%>
+ 
+<div id="page-wrapper">
+    <div class="col-md-12 graphs">
+   <h3>Add New Category</h3>
+    
+   <div class="col-md-12">
+   <div class="col-md-6">
+    <form method="POST">
+        <div class="form-row">
+          <div class="form-group col-md-9">
+            <label for="inputCity">Category Name</label>
+            <input name="categoryName" type="text" class="form-control" id="inputCity">
+          </div>
+         </div> </br>
+        <button type="submit" class="btn btn-primary">Add Category</button>
+    </form>
+   </div>
+   <div class="col-md-6">
+       <label for=""> List Category :  </label>
+       <h5 id="displayTags">
+        <% categories.forEach((category) => {%>
+            <span class="tags_item label label-primary"><%=category.name%></span>
+            <%});%>
+      </h5>
+   </div>
+   </div>
+
+   <div class="col-md-12">
+    <div class="col-md-6">
+        <form method="POST">
+            <div class="form-row">
+              <div class="form-group col-md-9">
+                <label for="inputCity">Category Parent Name</label>
+                <input name="parentCategoryName" type="text" class="form-control" id="inputCity">
+              </div>
+             </div> </br>
+            <button  type="submit" class="btn btn-primary">Add Parent Category</button>
+         </form>
+    </div>
+    <div class="col-md-6">
+        <label for=""> List Parent Category :  </label>
+        <h5 id="displayTags">
+            <% parentCategories.forEach((category) => {%>
+                <span class="tags_item label label-primary"><%=category.name%></span>
+                <%});%>
+       </h5>
+    </div>
+  
+   </div>
+  
+</div>
+</div>
+    <%-include('./layouts_admin/footer_admin.ejs')-%>    

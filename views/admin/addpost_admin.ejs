@@ -3,7 +3,7 @@
     <div class="graphs">
      <div class="md">
          <h3>Add New Post</h3>
-        <form action="/admin/add-post" method="POST" enctype="multipart/form-data">
+        <form id="addPostFrom"  method="POST" enctype="multipart/form-data">
 
         <!-- //compose -->
                 <div class="col-md-10"> 
@@ -11,7 +11,7 @@
                             <input name="title" type="text" class="form-control1" id="focusedinput" placeholder="Add Title">
                         </div>
                     <div class="form-group">
-                        <textarea name="content"  id="editor"></textarea>
+                        <textarea name="content"  id="editor" ></textarea>
                     </div>
                     <div class="form-group">
                         <textarea id="txtarea1" cols="50" rows="4" class="form-control1" placeholder="Expert" name="expert"></textarea>
@@ -23,14 +23,37 @@
                 <div class="form_submit_button">
                             <button class="btn-info btn" type="submit">Submit</button>
                             <button class="btn-danger btn">Cancel</button>
-                            <button class="btn-default btn">Reset</button>
+                            <input class="btn-default btn" onclick="resetFunction()" type="button" value="Reset">
                  </div>
+                <div class="categories_checkbox">
+                    <div class="form-group">
+                        <label for="checkbox" class=" control-label"><strong>Post Type</strong></label>
+                        <div class="radios">
+                            <label for="radio-01" class="label_radio">
+                                <input type="radio" name="postType" checked value="project"> Project
+                            </label>
+                            <label for="radio-02" class="label_radio">
+                                <input type="radio" name="postType" value="article"> Article
+                            </label>
+                          </div>
+                    </div>
+                </div>
+                <div class="categories_checkbox">
+                    <div class="form-group">
+                        <label for="checkbox" class=" control-label"><strong>Parent Categories</strong></label>
+                        <div class="">
+                            <% parentCategories.forEach((category) => {%>
+                            <div class="checkbox-inline1"><label><input type="radio" name="parentCategory" value=<%=category._id%>> <%=category.name%></label></div>
+                            <%});%>
+                        </div>
+                    </div>
+                </div>
                 <div class="categories_checkbox">
                     <div class="form-group">
                         <label for="checkbox" class=" control-label"><strong>Categories</strong></label>
                         <div class="">
                             <% categories.forEach((category) => {%>
-                            <div class="checkbox-inline1"><label><input type="checkbox" name="category" value=<%=category._id%>> <%=category.name%></label></div>
+                            <div class="checkbox-inline1"><label><input type="radio" name="category" value=<%=category._id%>> <%=category.name%></label></div>
                             <%});%>
                         </div>
                     </div>
@@ -68,5 +91,6 @@
         <!-- //cool 4  -->
         </form>
      <div class="clearfix"> </div>
+     </div>
 </div>
       <%-include('./layouts_admin/footer_admin.ejs')-%>    

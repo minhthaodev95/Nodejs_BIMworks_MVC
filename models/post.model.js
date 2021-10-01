@@ -17,8 +17,16 @@ let postSchema = new mongoose.Schema({
         type : String
     },
     category : {
-        type : [mongoose.Schema.Types.ObjectId],
+        type : mongoose.Schema.Types.ObjectId,
         ref : 'Category'
+    },
+    parentCategory : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ParentCategory'
+    },
+    type: {
+        type :String,
+        enum : ['project' , 'article']
     },
     authorID : {
         type : mongoose.Schema.Types.ObjectId,

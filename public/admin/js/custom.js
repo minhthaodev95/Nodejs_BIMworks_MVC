@@ -3,6 +3,9 @@ $(function() {
     $('#side-menu').metisMenu();
 
 });
+function resetFunction() {
+    document.getElementById("addPostFrom").reset();
+  }
 
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
@@ -34,3 +37,4 @@ $(function() {
         element.addClass('active');
     }
 });
+

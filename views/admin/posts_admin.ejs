@@ -1,5 +1,4 @@
-<%
-function removeVietnameseTones(str) {
+<% function removeVietnameseTones(str) {
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
   str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
   str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
@@ -62,7 +61,7 @@ function removeVietnameseTones(str) {
               <td><%= post.category.name%></td>
               <td><%= post.tags.map(tag => tag) %></td>
               <td><%= post.createAt%></td>
-              <td><a href="/du-an/<%= removeVietnameseTones(post.category.name).toLowerCase()%>/<%= post.url%>">View</a></td>
+              <td><a href="/du-an/<%= removeVietnameseTones(post.category.name).toLowerCase() %>/<%= post.url%>">View</a></td>
             </tr>
             <%});%>
           </tbody>
