@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var multiparty = require('connect-multiparty');
 var bodyParser = require('body-parser')
 
 var indexRouter = require('./routes/index');
@@ -19,7 +18,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 
-const MultipartyMiddleware = multiparty({uploadDir : './public/upload'})
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -38,26 +38,7 @@ app.use('/admin',async (req, res, next) => {
 }, usersRouter);
 /* GET Login . */
 
-app.post('/upload', MultipartyMiddleware, (req, res) => {
-  
-  var TempFile = req.files.upload;
-  var TempPathfile = TempFile.path;
 
-  var pathImageArr = TempPathfile.split('/');
-    pathImageArr.shift();
-    pathImageArr.unshift('');
-    var path = pathImageArr.join('/');
-    const image = new Image({
-      urlUpload : path
-    });
-
-    image.save();
-      res.status(200).json({
-       uploaded: true,
-        url: `${path}`
-      }); // this path is the same as in 5th row (except folder, here it change, but it's no matter) 
-
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

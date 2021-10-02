@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-image": "^29.2.0",
@@ -20,6 +20,7 @@
     "morgan": "~1.9.1",
     "multer": "^1.4.3",
     "multiparty": "^4.2.2",
+    "nodemon": "^2.0.13",
     "path": "^0.12.7",
     "slugify": "^1.6.0",
     "validator": "^13.6.0"

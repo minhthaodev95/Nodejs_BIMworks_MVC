@@ -57,5 +57,18 @@ const Post = mongoose.model('Post', postSchema);
 //         .catch(err => console.log(err));
 
 
+    // Post.create({
+    //     title : 'Bai viet Article so 9999' ,
+    //     expert : "Expert cua bai viet so 9999" ,
+    //     tag : "Bai viet so" ,
+    //     featureImage : '/upload/default_avatar.jpg',
+    //     category : null,
+    //     parentCategory : null,
+    //     type : "Article",
+    //     authorID : "6152d90fb037d9754af94057",
+    //     url : "bai-viet-so-9999",
+    //     body : "<p> Body  cua cac bai viet </p>"
+    // })    
+
 
 module.exports = Post;

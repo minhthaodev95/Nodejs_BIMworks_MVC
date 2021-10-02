@@ -4,8 +4,14 @@ let Author = require('../models/author.model');
 const Post = require('../models/post.model');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', async function(req, res, next) {
+  let projects = await Post.find({type : "Project"}).sort({createAt : -1}).populate('category').populate('authorID').limit(6)
+    .then(projects =>  projects )
+  let articles = await Post.find({type : "Article"}).sort({createAt : -1}).populate('authorID').limit(2)
+    .then(articles =>  articles )
+    //render 
+    res.render('index' , 
+    {projects : projects, articles : articles})
 });
 
 //  GET auboutus page
@@ -22,8 +28,10 @@ router.get('/price', function(req, res, next) {
 });
 
 //GET new-lists
-router.get('/news-list', function(req, res, next) {
-  res.render('news-list', {title : 'News List Page'});
+router.get('/news-list', async function(req, res, next) {
+  let articles = await Post.find({type : "Article"}).sort({createAt : -1}).populate('authorID')
+    .then(articles =>  articles )
+  res.render('news-list', {articles :articles});
 });
 //GET new-detail
 router.get('/new-detail', function(req, res, next) {

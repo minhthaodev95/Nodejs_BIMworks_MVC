@@ -4,6 +4,9 @@ const multer =  require('multer');
 var path = require('path')
 global.crypto = require('crypto')
 var slugify = require('slugify')
+var multiparty = require('connect-multiparty');
+const MultipartyMiddleware = multiparty({uploadDir : './public/upload'})
+
 
 
 
@@ -29,16 +32,59 @@ var storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 
+router.post('/upload', MultipartyMiddleware, (req, res) => {
+  
+  var TempFile = req.files.upload;
+  var TempPathfile = TempFile.path;
+
+  var pathImageArr = TempPathfile.split('/');
+    pathImageArr.shift();
+    pathImageArr.unshift('');
+    var path = pathImageArr.join('/');
+    const image = new Image({
+      urlUpload : path
+    });
+
+    image.save();
+      res.status(200).json({
+       uploaded: true,
+        url: `${path}`
+      }); // this path is the same as in 5th row (except folder, here it change, but it's no matter) 
+
+});
+
+
 /* GET admin dashboard. */
 router.get('/', function(req, res, next) {
   res.render('admin/index_admin', {userAdmin : req.userAdmin});
 });
 
 /* GET posts listing. */
-router.get('/posts', function(req, res, next) {
-  Post.find().populate('category').populate('authorID')
-  .then(posts =>   res.render('admin/posts_admin' , {posts : posts.reverse(), userAdmin : req.userAdmin})
-  );
+router.get('/posts', async function(req, res, next) {
+  const POST_PER_PAGE = 10;
+  let page = req.query.page || 1;
+  let totalPage = await Post.countDocuments().then(posts => Math.ceil(posts / POST_PER_PAGE));
+
+  if(page) {
+    parseInt(page)
+    if(page < 1) {
+      page = 1;
+    }
+    if(page > totalPage) {
+      page = totalPage;
+    }
+    let skipNumber = POST_PER_PAGE * (page - 1);
+
+    await Post.find({}).sort({createAt : -1}).populate('category').populate('authorID').skip(skipNumber).limit(POST_PER_PAGE)
+    .then(posts =>   res.render('admin/posts_admin' , 
+    {posts : posts, userAdmin : req.userAdmin, totalPage : totalPage, curentPage : page})
+    )
+    .catch(err => {
+      console.log(err);
+      res.status(500).send("Loi server")
+    });
+  }
+  
 });
 /* GET add post . */
 router.get('/add-post', async function(req, res, next) {
@@ -92,7 +138,7 @@ router.post('/add-post',upload.single('fileInput'), function(req, res, next) {
   let title = req.body.title ;
   let content = req.body.content;
   let expert = req.body.expert;
-  let tags = req.body.tags? req.body.tags : null;
+  let tags = req.body.tags ? req.body.tags.split(',') : null;
   let author = req.body.author ;
   let featureImage = pathImage? pathImage : '/upload/default_avatar.jpg';
   let category = req.body.category? req.body.category : null ;

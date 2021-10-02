@@ -9,7 +9,11 @@ function getInputValue(){
     let content = tags.map((tag) => '<span class="tags_item label label-primary">' + tag + '</span>')
 
     document.getElementById('displayTags').innerHTML= content.join('')
-    document.getElementsByClassName('tagsValue')[0].value = tags
+    console.log(tags)
+    document.getElementsByClassName('tagsValue')[0].value = tags;
+    document.getElementsByClassName('tag')[0].value = ''
 }
+
+
 
 

@@ -10,11 +10,11 @@
             <div class="panel-body no-padding">
                 <form class="form-signin app-cam" action="/add-user" method="POST">
                     <p>Enter your personal details below</p>
-                     <input type="text" class="form-control1" placeholder="Full Name" autofocus="" name="name">
-                     <input type="text" class="form-control1" placeholder="Age" autofocus="" name="age">
-                    <input type="text" class="form-control1" placeholder="Address" autofocus="" name="address">
-                    <input type="text" class="form-control1" placeholder="Email" autofocus="" name="email">
-                    <input type="text" class="form-control1" placeholder="City/Town" autofocus="" name="city">
+                     <input type="text" class="form-control1" placeholder="Full Name" autofocus="" name="name" required>
+                     <input type="text" class="form-control1" placeholder="Age" autofocus="" name="age" required>
+                    <input type="text" class="form-control1" placeholder="Address" autofocus="" name="address" required>
+                    <input type="text" class="form-control1" placeholder="Email" autofocus="" name="email" required>
+                    <input type="text" class="form-control1" placeholder="City/Town" autofocus="" name="city" required>
                     <div class="radios">
                       <label for="radio-01" class="label_radio">
                           <input type="radio" name="gender" checked value="male"> Male
@@ -24,9 +24,9 @@
                       </label>
                     </div>
                     <p> Enter your account details below</p>
-                    <input type="text" class="form-control1" placeholder="User Name" autofocus="" name="username">
-                    <input type="password" class="form-control1" placeholder="Password" name="password">
-                    <input type="password" class="form-control1" placeholder="Re-type Password" name="retypePass">
+                    <input type="text" class="form-control1" placeholder="User Name" autofocus="" name="username" required>
+                    <input type="password" class="form-control1" placeholder="Password" name="password" required>
+                    <input type="password" class="form-control1" placeholder="Re-type Password" name="retypePass" required>
                     <label class="checkbox-custom check-success">
                         <input type="checkbox" value="agree this condition" id="checkbox1"> <label for="checkbox1">I agree to the Terms of Service and Privacy Policy</label>
                     </label>
