@@ -31,7 +31,7 @@ let authorSchema = mongoose.Schema({
     },
     photo : {
         type : String,
-        default: ''
+        default: '/upload/default_avatar.jpg'
     },
     address : {
         type : String

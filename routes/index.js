@@ -1,6 +1,9 @@
 var express = require('express');
-var router = express.Router();
-let Author = require('../models/author.model');
+const router = express.Router();
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const saltRounds = 10;
+const Author = require('../models/author.model');
 const Post = require('../models/post.model');
 
 /* GET home page. */
@@ -69,22 +72,69 @@ router.get('/recruitment-detail', function(req, res, next) {
 
 // login and register
 router.get('/login', function(req, res, next) {
-  res.render('admin/login_admin');
+  res.render('admin/login_admin' ,{err : []});
 });
+
+//POST login pages
+
+router.post('/login', function(req, res, next) {
+  let err = [];
+  let username = req.body.username;
+  let password = req.body.password;
+  if(!username) {
+    err.push('Username is not provided')
+  }
+   if(!password) {
+    err.push('Password is not provided')
+  }
+  if(err.length) {
+    res.render('admin/login_admin' ,{err : err});
+    return;
+  }
+  Author.findOne({username: username}).then(user => {
+    if(!user) {
+      err.push('Username not found');
+      res.render('admin/login_admin' ,{err : err});
+      return;
+    }
+    
+    bcrypt.compare(password, user.password, (errs, result) => {
+      if(result == true) {
+        let  token = jwt.sign({ _id:  user._id }, 'secretString');
+    
+        res.cookie('token', token);
+        res.redirect('/admin')
+      }
+      else {
+        err.push('Password mismatch')
+        res.render('admin/login_admin' ,{err : err});
+        return;
+      }
+    })
+    
+    
+
+  })
+  
+
+
+})
+
 /* GET Register. */
 router.get('/register', function(req, res, next) {
   res.render('admin/register_admin');
 });
 /* POST Register. */
 router.post('/register', function(req, res, next)  {
-    let name = req.body.name;
-    let age = req.body.age;
-    let gender = req.body.gender;
-    let email = req.body.email;
-    let username = req.body.username;
-    let password = req.body.password;
-    let address = req.body.address;
-
+  console.log(req.body);
+  let name = req.body.name;
+  let age = req.body.age;
+  let gender = req.body.gender;
+  let email = req.body.email;
+  let username = req.body.username;
+  let address = req.body.address;
+  bcrypt.hash(req.body.password, saltRounds, function(err,hash) {
+    password  = hash; 
     const author =  Author({
       name : name,
       age : parseInt(age),
@@ -94,11 +144,10 @@ router.post('/register', function(req, res, next)  {
       password : password,
       address : address
     });
+    console.log(author)
      author.save();
-    console.log(req.body);
+  })
     res.redirect('/register');
-  
-
 });
 
 

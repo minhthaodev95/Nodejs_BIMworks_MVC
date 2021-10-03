@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser')
+var cookieParser = require('cookie-parser')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users.route');
@@ -13,7 +14,11 @@ let Category = require('./models/category.model')
 let ParentCategory = require('./models/parent_category.model')
 let Image = require('./models/image.model')
 
+let authController =  require('./controllers/auth.controller')
+
 var app = express();
+app.use(cookieParser())
+
 app.use(bodyParser.urlencoded({
   extended: true
 }))
@@ -30,8 +35,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', indexRouter);
-app.use('/admin',async (req, res, next) => {
+app.use('/',indexRouter);
+app.use('/admin',authController.authMiddleware ,async (req, res, next) => {
   let user = await Author.findOne({id : '6152d90fb037d9754af94057'}).then(user => user);
   req.userAdmin =  user
   next();
