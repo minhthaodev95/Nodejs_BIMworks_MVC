@@ -8,11 +8,13 @@ var app = require('../app');
 var debug = require('debug')('nodejs-bim:server');
 var http = require('http');
 const mongoose = require('mongoose');
+require('dotenv').config()
+
 
 
 // Connect Database
 mongoose
-  .connect("mongodb+srv://minhthaodev95:FsdLiEzHXnCvnyh0@cluster0.mlcsh.mongodb.net/Cluster0?retryWrites=true&w=majority", {
+  .connect(process.env.MONGO_LINK, {
     useNewUrlParser: true,
   })
   .then(() => console.log('DB connection successful!'))
