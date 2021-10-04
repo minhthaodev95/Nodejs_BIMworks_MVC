@@ -161,7 +161,7 @@ router.post('/add-post',upload.single('fileInput'), function(req, res, next) {
     parentCategory : parentCategory
   });
   post.save();
-  res.redirect('/admin/add-post');  
+  res.redirect('/admin/add-post', {userAdmin : req.userAdmin});  
 })
 
 

@@ -23,8 +23,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -36,11 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/',indexRouter);
-app.use('/admin',authController.authMiddleware ,async (req, res, next) => {
-  let user = await Author.findOne({id : '6152d90fb037d9754af94057'}).then(user => user);
-  req.userAdmin =  user
-  next();
-}, usersRouter);
+app.use('/admin',authController.authMiddleware , usersRouter);
 /* GET Login . */
 
 
