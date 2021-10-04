@@ -266,30 +266,30 @@ router.get('/register', function(req, res, next) {
   res.render('admin/register_admin');
 });
 /* POST Register. */
-router.post('/register', function(req, res, next)  {
-  console.log(req.body);
-  let name = req.body.name;
-  let age = req.body.age;
-  let gender = req.body.gender;
-  let email = req.body.email;
-  let username = req.body.username;
-  let address = req.body.address;
-  bcrypt.hash(req.body.password, saltRounds, function(err,hash) {
-    password  = hash; 
-    const author =  Author({
-      name : name,
-      age : parseInt(age),
-      gender : gender,
-      email :email,
-      username : username,
-      password : password,
-      address : address
-    });
-    console.log(author)
-     author.save();
-  })
-    res.redirect('/register');
-});
+// router.post('/register', function(req, res, next)  {
+//   console.log(req.body);
+//   let name = req.body.name;
+//   let age = req.body.age;
+//   let gender = req.body.gender;
+//   let email = req.body.email;
+//   let username = req.body.username;
+//   let address = req.body.address;
+//   bcrypt.hash(req.body.password, saltRounds, function(err,hash) {
+//     password  = hash; 
+//     const author =  Author({
+//       name : name,
+//       age : parseInt(age),
+//       gender : gender,
+//       email :email,
+//       username : username,
+//       password : password,
+//       address : address
+//     });
+//     console.log(author)
+//      author.save();
+//   })
+//     res.redirect('/login');
+// });
 
 
 
