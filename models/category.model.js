@@ -4,6 +4,10 @@ let categorySchema = mongoose.Schema({
     name : {
         type :String,
         required : [true, 'Category must have name']
+    },
+    slugName: {
+        type: String,
+        required :[true, 'Category must have slug']
     }
 })
 

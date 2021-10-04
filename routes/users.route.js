@@ -61,7 +61,7 @@ router.get('/', function(req, res, next) {
 
 /* GET posts listing. */
 router.get('/posts', async function(req, res, next) {
-  const POST_PER_PAGE = 10;
+  const POST_PER_PAGE = 15;
   let page = req.query.page || 1;
   let totalPage = await Post.countDocuments().then(posts => Math.ceil(posts / POST_PER_PAGE));
 
@@ -90,7 +90,10 @@ router.get('/posts', async function(req, res, next) {
 router.get('/add-post', async function(req, res, next) {
   let categories = await Category.find().then(categories =>   categories);
   let parentCategories = await ParentCategory.find().then(parentCategories =>   parentCategories);
-  res.render('admin/addpost_admin' , {categories : categories, parentCategories : parentCategories, userAdmin : req.userAdmin}
+  res.render('admin/addpost_admin' ,
+   {categories : categories, 
+    parentCategories : parentCategories,
+     userAdmin : req.userAdmin}
   );
 });
 
