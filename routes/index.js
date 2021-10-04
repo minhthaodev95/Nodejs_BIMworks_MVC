@@ -7,6 +7,7 @@ const Author = require('../models/author.model');
 const Post = require('../models/post.model');
 const Category = require('../models/category.model');
 const ParentCategory = require('../models/parent_category.model');
+const mongoose = require('mongoose');
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
@@ -61,7 +62,7 @@ router.get('/news-list', async function(req, res, next) {
 
 //GET projec-list --> done
 router.get('/project-list', async function(req, res, next) {
-  const POST_PER_PAGE = 2;
+  const POST_PER_PAGE = 9;
   let page = req.query.page || 1;
   let totalPage = await Post.find({ type: "Project" }).countDocuments().then(posts => Math.ceil(posts / POST_PER_PAGE));
   console.log(totalPage);
@@ -163,17 +164,46 @@ router.get('/project-list/:parentCategory', async (req, res) => {
 
 
 //GET projec-list-detail --> done
-router.get('/project/:category/:url', function(req, res, next) {
-  Post.findOne({url : req.params.url, type : 'Project'}).populate('category').populate('authorID')
-  .then(posts =>   res.render('project-detail' , {posts : posts})
-  );
+router.get('/project/:category/:url', async function(req, res, next) {
+  let post = await Post.findOne({url : req.params.url, type : 'Project'}).populate('category').populate('authorID')
+    .then(post => post);
+  let projects = await Post.aggregate([
+    { $match:
+        {
+      $and: [
+          { type: 'Project' },
+          { category: new mongoose.Types.ObjectId(post.category.id) }
+          ]
+        }
+    },
+    {
+      $sample:
+        { size: 3 }
+    },
+    {
+      $lookup:
+      {
+        from: 'categories',
+        as: 'category',
+        localField: 'category',
+        foreignField: '_id'
+      }
+    }
+  ])
+    .then(projects => projects)
+    res.render('project-detail' , {post : post, projects : projects})
 });
 
 //GET new-detail --> done
-router.get('/article/:url', function(req, res, next) {
-  Post.findOne({url : req.params.url, type : 'Article'}).populate('authorID')
-  .then(posts =>   res.render('news-detail' , {posts : posts})
-  );
+router.get('/article/:url', async function(req, res, next) {
+  let post = await Post.findOne({url : req.params.url, type : 'Article'}).populate('authorID')
+    .then(post => post)
+  let articles = await Post.aggregate([{ $match: { type: 'Article' } }, { $sample: { size: 2 } }, { $lookup: { from: 'authors' ,as : 'authorID', localField: 'authorID', foreignField: '_id'} }])
+    .then(articles => articles)
+  // console.log(articles[0].authorID[0].name);
+  res.render('news-detail', { post: post, articles: articles })
+  
+
 });
 //GET recruitment (recruitment just have a page )
 router.get('/recruitment-list', function(req, res, next) {

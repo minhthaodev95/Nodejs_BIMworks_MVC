@@ -1,5 +1,6 @@
-<%- include('./layouts/header.ejs') -%>
+<% function removeVietnameseTones(e){return e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=e.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a")).replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e")).replace(/ì|í|ị|ỉ|ĩ/g,"i")).replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o")).replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u")).replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y")).replace(/đ/g,"d")).replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g,"A")).replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g,"E")).replace(/Ì|Í|Ị|Ỉ|Ĩ/g,"I")).replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g,"O")).replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g,"U")).replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g,"Y")).replace(/Đ/g,"D")).replace(/[^\w ]+/g,"")).replace(/ +/g,"-")).replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g,"")).replace(/\u02C6|\u0306|\u031B/g,"")).replace(/ + /g," ")).trim()}%>
 
+<%- include('./layouts/header.ejs') -%>
 
             <!-- Container -->
             <main id="container" role="main">
@@ -9,10 +10,10 @@
                     <section class="page-title">
                         <div class="page-title__content">
                             <div class="container">
-                                <h2 class="page-title__name"><%= posts.title %></h2>
+                                <h2 class="page-title__name"><%= post.title %></h2>
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb__item"><a href="/" class="breadcrumb__link">Trang chủ</a></li>
-                                    <li class="breadcrumb__item"><a href="/" class="breadcrumb__link"><%= posts.category.name%></a></li>
+                                    <li class="breadcrumb__item"><a href="/" class="breadcrumb__link"><%= post.category.name%></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -28,7 +29,7 @@
                             <div class="container">
                                 <div class="project__content">
 
-                                    <%- posts.body%>
+                                    <%- post.body%>
                                 </div>
                                 <div class="posts__info">
                                     <div class="posts__tags">
@@ -61,48 +62,22 @@
                             <div class="project__related">
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-4 project__item">
-                                            <!-- Project box -->
-                                            <div class="project-box">
-                                                <a href="./project-detail" class="project-box__link">
-                                                    <div class="project-box__content">
-                                                        <strong class="project-box__name text-ellipsis text-ellipsis--2line">Dự án 02</strong>
-                                                        <p class="project-box__description text-ellipsis text-ellipsis--2line">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, praesentium minus ipsam saepe explicabo dolorem voluptatem! Veritatis eos, officia numquam quo nobis vitae doloribus atque quidem itaque ratione a facere!</p>
-                                                        <span class="project-box__btn-viewmore">Xem thêm</span>
-                                                    </div>
-                                                    <div class="project-box__img"><img src="/images/projects/img_thumbnai_project.jpg" alt=""></div>
-                                                </a>
+                                        <% projects.forEach((project) => {%>
+                                            <div class="col-4 project__item">
+                                                <!-- Project box -->
+                                                <div class="project-box">
+                                                    <a href="/<%= removeVietnameseTones(project.type).toLowerCase()%>/<%= removeVietnameseTones(project.category[0].name).toLowerCase() %>/<%= project.url%>" class="project-box__link">
+                                                        <div class="project-box__content">
+                                                            <strong class="project-box__name text-ellipsis text-ellipsis--2line"><%=project.title%></strong>
+                                                            <p class="project-box__description text-ellipsis text-ellipsis--2line"><%= project.expert %></p>
+                                                            <span class="project-box__btn-viewmore">Xem thêm</span>
+                                                        </div>
+                                                        <div class="project-box__img"><img style="height: 500px;" src="<%=project.featureImage%>" alt=""></div>
+                                                    </a>
+                                                </div>
+                                                <!-- // Project box -->
                                             </div>
-                                            <!-- // Project box -->
-                                        </div>
-                                        <div class="col-4 project__item">
-                                            <!-- Project box -->
-                                            <div class="project-box">
-                                                <a href="./project-detail" class="project-box__link">
-                                                    <div class="project-box__content">
-                                                        <strong class="project-box__name text-ellipsis text-ellipsis--2line">Dự án 03</strong>
-                                                        <p class="project-box__description text-ellipsis text-ellipsis--2line">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, praesentium minus ipsam saepe explicabo dolorem voluptatem! Veritatis eos, officia numquam quo nobis vitae doloribus atque quidem itaque ratione a facere!</p>
-                                                        <span class="project-box__btn-viewmore">Xem thêm</span>
-                                                    </div>
-                                                    <div class="project-box__img"><img src="/images/projects/img_thumbnai_project_02.jpg" alt=""></div>
-                                                </a>
-                                            </div>
-                                            <!-- // Project box -->
-                                        </div>
-                                        <div class="col-4 project__item">
-                                            <!-- Project box -->
-                                            <div class="project-box">
-                                                <a href="./project-detail" class="project-box__link">
-                                                    <div class="project-box__content">
-                                                        <strong class="project-box__name text-ellipsis text-ellipsis--2line">Dự án 04</strong>
-                                                        <p class="project-box__description text-ellipsis text-ellipsis--2line">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, praesentium minus ipsam saepe explicabo dolorem voluptatem! Veritatis eos, officia numquam quo nobis vitae doloribus atque quidem itaque ratione a facere!</p>
-                                                        <span class="project-box__btn-viewmore">Xem thêm</span>
-                                                    </div>
-                                                    <div class="project-box__img"><img src="/images/projects/img_thumbnai_project_03.jpg" alt=""></div>
-                                                </a>
-                                            </div>
-                                            <!-- // Project box -->
-                                        </div>
+                                        <%})%>
                                     </div>
                                 </div>
                             </div>

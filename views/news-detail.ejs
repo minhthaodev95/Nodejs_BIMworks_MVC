@@ -1,3 +1,4 @@
+<% function removeVietnameseTones(e){return e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=(e=e.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a")).replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e")).replace(/ì|í|ị|ỉ|ĩ/g,"i")).replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o")).replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u")).replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y")).replace(/đ/g,"d")).replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g,"A")).replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g,"E")).replace(/Ì|Í|Ị|Ỉ|Ĩ/g,"I")).replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g,"O")).replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g,"U")).replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g,"Y")).replace(/Đ/g,"D")).replace(/[^\w ]+/g,"")).replace(/ +/g,"-")).replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g,"")).replace(/\u02C6|\u0306|\u031B/g,"")).replace(/ + /g," ")).trim()}%>
 <%- include('./layouts/header.ejs') -%>
 
             <!-- Container -->
@@ -8,10 +9,10 @@
                     <section class="page-title">
                         <div class="page-title__content">
                             <div class="container">
-                                <h2 class="page-title__name"><%= posts.title%></h2>
+                                <h2 class="page-title__name"><%= post.title%></h2>
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb__item"><a href="/" class="breadcrumb__link">Home</a></li>
-                                    <li class="breadcrumb__item"><a href="/" class="breadcrumb__link"><%= posts.type%></a></li>
+                                    <li class="breadcrumb__item"><a href="/" class="breadcrumb__link"><%= post.type%></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -26,7 +27,7 @@
                         <div class="section__content">
                             <div class="container">
                                 <div class="posts__content">
-                                    <%- posts.body%>
+                                    <%- post.body%>
                                 </div>
                                 <div class="posts__info">
                                     <div class="posts__tags">
@@ -59,38 +60,28 @@
                             <div class="posts__related">
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-6 posts__item">
-                                            <!-- Article -->
-                                            <div class="article">
-                                                <div class="article__img"><img src="/images/posts/bg_thumbnai_news.jpg" alt=""></div>
-                                                <div class="article__content">
-                                                    <div class="article__tags">
-                                                        <a href="#none" class="article__tag">PHONG THỦY</a>
-                                                        <a href="#none" class="article__tag">THIẾT KẾ</a>
+                                        <% articles.forEach((article) => {%>
+                                            <div class="col-6 posts__item">
+                                                <!-- Article -->
+                                                <div class="article">
+                                                    <div class="article__img"><img src="<%= article.featureImage %>" alt=""></div>
+                                                    <div class="article__content">
+                                                        <div class="article__tags">
+                                                            <% if(article.tags.length != 0 ) {
+                                                                article.tags.map(tag => {%>
+                                                                    <a href="/tags/<%=removeVietnameseTones(tag).toLowerCase().replace(' ', '-')%>" class="article__tag"><%= tag.toUpperCase()%></a>
+                                                                <%}) } else {%>
+                                                            <a href="#none" class="article__tag"></a>
+                                                            <%}%>
+                                                        </div>
+                                                        <strong class="article__name text-ellipsis text-ellipsis--2line"><%=  article.title %></strong>
+                                                        <p class="article__description text-ellipsis text-ellipsis--3line"><%= article.expert %></p>
                                                     </div>
-                                                    <strong class="article__name text-ellipsis text-ellipsis--2line">Tiêu đề bài viết phong thủy Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur voluptatibus</strong>
-                                                    <p class="article__description text-ellipsis text-ellipsis--3line">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur voluptatibus neque similique dolor eaque in ipsam at, tempora nostrum excepturi maxime veritatis magnam nihil odio explicabo ducimus laboriosam a animi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur voluptatibus neque similique dolor eaque in ipsam at, tempora nostrum excepturi maxime veritatis magnam nihil odio explicabo ducimus laboriosam a animi.</p>
+                                                    <a href="/<%= removeVietnameseTones(article.type).toLowerCase()%>/<%= article.url%>" class="article__link"></a>
                                                 </div>
-                                                <a href="./news-detail" class="article__link"></a>
+                                                <!-- // Article -->
                                             </div>
-                                            <!-- // Article -->
-                                        </div>
-                                        <div class="col-6 posts__item">
-                                            <!-- Article -->
-                                            <div class="article">
-                                                <div class="article__img"><img src="/images/posts/bg_thumbnai_news.jpg" alt=""></div>
-                                                <div class="article__content">
-                                                    <div class="article__tags">
-                                                        <a href="#none" class="article__tag">PHONG THỦY</a>
-                                                        <a href="#none" class="article__tag">THIẾT KẾ</a>
-                                                    </div>
-                                                    <strong class="article__name text-ellipsis text-ellipsis--2line">Tiêu đề bài viết phong thủy Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur voluptatibus</strong>
-                                                    <p class="article__description text-ellipsis text-ellipsis--3line">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur voluptatibus neque similique dolor eaque in ipsam at, tempora nostrum excepturi maxime veritatis magnam nihil odio explicabo ducimus laboriosam a animi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur voluptatibus neque similique dolor eaque in ipsam at, tempora nostrum excepturi maxime veritatis magnam nihil odio explicabo ducimus laboriosam a animi.</p>
-                                                </div>
-                                                <a href="/news-detail" class="article__link"></a>
-                                            </div>
-                                            <!-- // Article -->
-                                        </div>
+                                            <%})%>
                                     </div>
                                 </div>
                             </div>
