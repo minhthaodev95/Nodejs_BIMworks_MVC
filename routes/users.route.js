@@ -205,4 +205,13 @@ router.get('/add-users', function(req, res, next) {
     res.render('admin/add_user', {userAdmin : req.userAdmin});
 });
 
+router.get('/logout', function (req, res, next) {
+  try {
+    res.clearCookie('token');
+    res.redirect("/")
+  } catch (error) {
+      res.status(500).send(error)
+  }
+})
+
 module.exports = router;
