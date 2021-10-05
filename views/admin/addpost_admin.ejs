@@ -94,64 +94,76 @@
      </div>
 </div>
 <script type="text/javascript">
-        ClassicEditor
-				.create( document.querySelector( '#editor' ), {
-                ckfinder : {
-                    uploadUrl: '/admin/upload?command=QuickUpload&type=Images&responseType=json',
-                    },
+                    ClassicEditor
+                                .create( document.querySelector( '#editor' ),{
+                                    ckfinder : {
+                                    uploadUrl: '/admin/upload?command=QuickUpload&type=Images&responseType=json',
+                                    }
+                                } )
+                                .then( editor => {
+                                        console.log( editor );
+                                } )
+                                .catch( error => {
+                                        console.error( error );
+                                } );
+        // ClassicEditor
+		// 		.create( document.querySelector( '#editor' ), {
+        //         ckfinder : {
+        //             uploadUrl: '/admin/upload?command=QuickUpload&type=Images&responseType=json',
+        //             },
 					
-				// toolbar: {
-				// 	items: [
-				// 		'heading',
-				// 		'|',
-				// 		'bold',
-				// 		'italic',
-				// 		'link',
-				// 		'bulletedList',
-				// 		'numberedList',
-				// 		'|',
-				// 		'outdent',
-				// 		'indent',
-				// 		'|',
-				// 		'imageUpload',
-				// 		'blockQuote',
-				// 		'insertTable',
-				// 		'mediaEmbed',
-				// 		'undo',
-				// 		'redo'
-				// 	]
-				// },
-				// language: 'en',
+		// 		toolbar: {
+		// 			items: [
+		// 				'heading',
+		// 				'|',
+		// 				'bold',
+		// 				'italic',
+		// 				'link',
+		// 				'bulletedList',
+		// 				'numberedList',
+		// 				'|',
+		// 				'outdent',
+		// 				'indent',
+		// 				'|',
+		// 				'imageUpload',
+		// 				'blockQuote',
+		// 				'insertTable',
+		// 				'mediaEmbed',
+		// 				'undo',
+		// 				'redo'
+		// 			]
+		// 		},
+		// 		language: 'en',
 				
-				// table: {
-				// 	contentToolbar: [
-				// 		'tableColumn',
-				// 		'tableRow',
-				// 		'mergeTableCells'
-				// 	]
-				// },
-				// image : {
+		// 		table: {
+		// 			contentToolbar: [
+		// 				'tableColumn',
+		// 				'tableRow',
+		// 				'mergeTableCells'
+		// 			]
+		// 		},
+		// 		image : {
                     
-                //     toolbar: [
-                //     'imageStyle:block',
-                //     'imageStyle:side',
-                //     '|',
-                //     'toggleImageCaption',
-                //     'imageTextAlternative',
-                //     '|',
-                //     'linkImage'
-                //         ]
+        //             toolbar: [
+        //             'imageStyle:block',
+        //             'imageStyle:side',
+        //             '|',
+        //             'toggleImageCaption',
+        //             'imageTextAlternative',
+        //             '|',
+        //             'linkImage'
+        //                 ]
                     
-                // }
-				} )
-				.then( editor => {
-					window.editor = editor.getData();
-				} )
-				.catch( error => {
-					console.error( 'Oops, something went wrong!' );
-					console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
-					console.warn( 'Build id: 5akoeqkp05on-nohdljl880ze' );
-					console.error( error );
-				} );
+        //         }
+		// 		} )
+		// 		.then( editor => {
+		// 			window.editor = editor.getData();
+		// 		} )
+		// 		.catch( error => {
+		// 			console.error( 'Oops, something went wrong!' );
+		// 			console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+		// 			console.warn( 'Build id: 5akoeqkp05on-nohdljl880ze' );
+		// 			console.error( error );
+		// 		} );
 </script>
       <%-include('./layouts_admin/footer_admin.ejs')-%>    
