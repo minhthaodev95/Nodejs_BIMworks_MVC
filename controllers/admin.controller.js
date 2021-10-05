@@ -184,7 +184,7 @@ module.exports = {
             res.status(200).json({
             uploaded: true,
                 url: `${path}`
-            }); // this path is the same as in 5th row (except folder, here it change, but it's no matter) 
+            }); //  ) 
     }
 
 }
