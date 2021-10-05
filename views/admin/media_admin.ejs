@@ -8,7 +8,7 @@
 
                 <% images.forEach(image => {%>
                   <div class="media-left">
-                    <a target="_blank" href="http://localhost:3000<%=image.urlUpload%>">
+                    <a target="_blank" href="<%=image.urlUpload%>">
                       <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="<%=image.urlUpload%>" data-holder-rendered="true" style="width: 128px; height: 128px;">
                     </a>
                   </div>

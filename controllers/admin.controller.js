@@ -4,6 +4,24 @@ let Image = require('../models/image.model')
 let Category = require('../models/category.model')
 let ParentCategory = require('../models/parent_category.model')
 let Author = require('../models/author.model');
+const path = require('path');
+const multiparty = require('connect-multiparty');
+const MultipartyMiddleware = multiparty({ uploadDir: './public/upload' })
+const multer =  require('multer');
+
+//folder upload image
+var storage = multer.diskStorage({
+    destination: './public/upload/',
+    filename: function (req, file, cb) {
+      crypto.pseudoRandomBytes(16, function (err, raw) {
+        if (err) return cb(err)
+  
+        cb(null, raw.toString('hex') + path.extname(file.originalname))
+      })
+    }
+  })
+  const upload = multer({ storage: storage })
+
 
 
 
@@ -81,7 +99,7 @@ module.exports = {
             parentCategory : parentCategory
           });
           post.save();
-          res.redirect('/admin/add-post', {userAdmin : req.userAdmin});
+          res.redirect('/admin/add-post');
     },
     add_new_category: async (req, res, next) => {
         let categories = await Category.find().then(categories =>   categories);
@@ -150,6 +168,7 @@ module.exports = {
           }
     },
     upload: (req, res, next) => {
+        console.log('uploading')
         var TempFile = req.files.upload;
         var TempPathfile = TempFile.path;
 

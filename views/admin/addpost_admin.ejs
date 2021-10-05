@@ -97,52 +97,52 @@
         ClassicEditor
 				.create( document.querySelector( '#editor' ), {
                 ckfinder : {
-                    uploadUrl: 'http://localhost:3000/admin/upload?command=QuickUpload&type=Images&responseType=json',
+                    uploadUrl: '/admin/upload?command=QuickUpload&type=Images&responseType=json',
                     },
 					
-				toolbar: {
-					items: [
-						'heading',
-						'|',
-						'bold',
-						'italic',
-						'link',
-						'bulletedList',
-						'numberedList',
-						'|',
-						'outdent',
-						'indent',
-						'|',
-						'imageUpload',
-						'blockQuote',
-						'insertTable',
-						'mediaEmbed',
-						'undo',
-						'redo'
-					]
-				},
-				language: 'en',
+				// toolbar: {
+				// 	items: [
+				// 		'heading',
+				// 		'|',
+				// 		'bold',
+				// 		'italic',
+				// 		'link',
+				// 		'bulletedList',
+				// 		'numberedList',
+				// 		'|',
+				// 		'outdent',
+				// 		'indent',
+				// 		'|',
+				// 		'imageUpload',
+				// 		'blockQuote',
+				// 		'insertTable',
+				// 		'mediaEmbed',
+				// 		'undo',
+				// 		'redo'
+				// 	]
+				// },
+				// language: 'en',
 				
-				table: {
-					contentToolbar: [
-						'tableColumn',
-						'tableRow',
-						'mergeTableCells'
-					]
-				},
-				image : {
+				// table: {
+				// 	contentToolbar: [
+				// 		'tableColumn',
+				// 		'tableRow',
+				// 		'mergeTableCells'
+				// 	]
+				// },
+				// image : {
                     
-                    toolbar: [
-                    'imageStyle:block',
-                    'imageStyle:side',
-                    '|',
-                    'toggleImageCaption',
-                    'imageTextAlternative',
-                    '|',
-                    'linkImage'
-                        ]
+                //     toolbar: [
+                //     'imageStyle:block',
+                //     'imageStyle:side',
+                //     '|',
+                //     'toggleImageCaption',
+                //     'imageTextAlternative',
+                //     '|',
+                //     'linkImage'
+                //         ]
                     
-                }
+                // }
 				} )
 				.then( editor => {
 					window.editor = editor.getData();

@@ -180,7 +180,7 @@ module.exports = {
       res.render('news-detail', { post: post, articles: articles })
     },
     recruitment: (req, res, next) => {
-        res.render('recruitment-list', {title : 'Recruitment List Page'});
+        res.render('recruitment', {title : 'Recruitment List Page'});
     }
 
 }
