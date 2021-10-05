@@ -185,6 +185,11 @@ module.exports = {
             uploaded: true,
                 url: `${path}`
             }); //  ) 
+    },
+  delete_post_by_id: async (req, res, next) => {
+   await Post.findByIdAndDelete(req.params.id);
+    res.redirect(req.get('referer'));
+
     }
 
 }

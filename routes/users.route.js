@@ -53,4 +53,5 @@ router.post('/add-post',upload.single('fileInput'), adminController.post_add_pos
 router.post('/upload', MultipartyMiddleware, adminController.upload);
 //POST add_users
 router.post('/add-users', adminController.post_add_users_admin);
+router.get('/delete/:id', adminController.delete_post_by_id);
 module.exports = router;

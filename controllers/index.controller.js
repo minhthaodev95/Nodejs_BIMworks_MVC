@@ -191,5 +191,5 @@ module.exports = {
     recruitment: (req, res, next) => {
         res.render('recruitment', {title : 'Recruitment List Page'});
     }
-
+    
 }

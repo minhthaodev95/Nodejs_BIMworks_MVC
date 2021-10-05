@@ -21,6 +21,7 @@
               <th>Tags</th>
               <th>Date</th>
               <th>Detail</th>
+              <th>Delete</th>
 
             </tr>
           </thead>
@@ -35,11 +36,11 @@
               <td><%= post.tags ? post.tags.map(tag => tag) : "None" %></td>
               <td><%= post.createAt%></td>
               <% if (post.type == 'Project') {%>
-              <td><a href="/<%= removeVietnameseTones(post.type).toLowerCase()%>/<%= removeVietnameseTones(post.category.name).toLowerCase() %>/<%= post.url%>">View</a></td>
+              <td><a style="text-decoration:none" href="/<%= removeVietnameseTones(post.type).toLowerCase()%>/<%= removeVietnameseTones(post.category.name).toLowerCase() %>/<%= post.url%>"><span class=" label label-primary">View</span></a></td>
               <%} else {%>
-              <td><a target="_blank" href="/<%= removeVietnameseTones(post.type).toLowerCase()%>/<%= post.url%>">View</a></td>
+              <td><a style="text-decoration:none" target="_blank" href="/<%= removeVietnameseTones(post.type).toLowerCase()%>/<%= post.url%>"><span class=" label label-primary">View</span></a></td>
               <%}%>
-
+              <td><a style="text-decoration:none" href="delete/<%= post.id%>"><span class=" label label-danger">Delete</span></a></td>
             </tr>
             <%});%>
           </tbody>
