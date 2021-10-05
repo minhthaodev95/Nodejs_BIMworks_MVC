@@ -12,7 +12,7 @@
                                 <h2 class="page-title__name"><%= post.title%></h2>
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb__item"><a href="/" class="breadcrumb__link">Home</a></li>
-                                    <li class="breadcrumb__item"><a href="/" class="breadcrumb__link"><%= post.type%></a></li>
+                                    <li class="breadcrumb__item"><a href="/news-list" class="breadcrumb__link"><%= post.type%></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -33,9 +33,12 @@
                                     <div class="posts__tags">
                                         <strong class="posts__info-name">TAGS</strong>
                                         <div class="posts__info-content">
-                                            <a href="#none" class="posts__tags-item">THIẾT KẾ</a>
-                                            <a href="#none" class="posts__tags-item">NỘI THẤT</a>
-                                            <a href="#none" class="posts__tags-item">THI CÔNG</a>
+                                            <% if(post.tags.length != 0 ) {
+                                                post.tags.map(tag => {%>
+                                                    <a href="/tags/<%=removeVietnameseTones(tag).toLowerCase().replace(' ', '-')%>" class="posts__tags-item"><%= tag.toUpperCase()%></a>
+                                                <%}) } else {%>
+                                            <a href="#none" class="posts__tags-item"></a>
+                                            <%}%>
                                         </div>
                                     </div>
                                     <div class="posts__share">

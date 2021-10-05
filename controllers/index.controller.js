@@ -2,6 +2,8 @@ const Post = require('../models/post.model');
 const Category = require('../models/category.model');
 const ParentCategory = require('../models/parent_category.model');
 const mongoose = require('mongoose');
+var createError = require('http-errors');
+
 
 module.exports = {
     index: async (req, res, next) => {
@@ -51,7 +53,8 @@ module.exports = {
         let categoryParams = req.params.category
         //Get category id 
         let category = await Category.findOne({ slugName: categoryParams });
-        const POST_PER_PAGE = 9;
+        if (category) {
+            const POST_PER_PAGE = 9;
         let page = req.query.page || 1;
             let totalPage = await Post.find({ type: "Project", category : category.id }).countDocuments().then(posts => Math.ceil(posts / POST_PER_PAGE));
             if(page) {
@@ -80,14 +83,16 @@ module.exports = {
                 { projects : [], totalPage : totalPage, curentPage : page})
             }
             }
+        } 
+        next(createError(404));
+        
+        
     },
     project_list_parent_category: async (req, res, next) => {
         let categoryParams = req.params.parentCategory
-        console.log(categoryParams);
-        //Get category id 
         let category = await ParentCategory.findOne({ slugName: categoryParams });
-        console.log(category);
-        const POST_PER_PAGE = 9;
+        if (category) {
+            const POST_PER_PAGE = 9;
         let page = req.query.page || 1;
             let totalPage = await Post.find({ type: "Project", parentCategory : category.id }).countDocuments().then(posts => Math.ceil(posts / POST_PER_PAGE));
             if(page) {
@@ -116,9 +121,13 @@ module.exports = {
                 { projects : [], totalPage : totalPage, curentPage : page})
             }
             }
+        }
+        
+            next(createError(404));
+        
     },
     project_detail: async (req, res, next) => {
-        let post = await Post.findOne({url : req.params.url, type : 'Project'}).populate('category').populate('authorID')
+        let post = await Post.findOne({url : req.params.url, type : 'Project'}).populate('category').populate('parentCategory').populate('authorID')
         .then(post => post);
       let projects = await Post.aggregate([
         { $match:
