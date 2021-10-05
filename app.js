@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const bodyParser = require('body-parser')
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users.route');
 let authController =  require('./controllers/auth.controller')
@@ -13,12 +12,10 @@ require('dotenv').config()
 const app = express();
 
 app.use(cookieParser())
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
-app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+
+app.use(logger('dev'));
 app.use(cookieParser());
 
 // view engine setup
