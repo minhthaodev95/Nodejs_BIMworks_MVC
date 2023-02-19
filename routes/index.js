@@ -51,4 +51,7 @@ router.post('/login', authController.postLogin);
 // POST mail in contact form in page contact-us
 router.post(['/contact-us', '/about-us', '/price'], contact_formController.postMail)
 
+// get post by tags
+router.get('/tags/:tag', indexController.getPostByTags)
+
 module.exports = router;

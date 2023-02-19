@@ -177,7 +177,7 @@ module.exports = {
         if (totalPage > 0) {
             await Post.find({type : "Article"}).sort({createAt : -1}).populate('authorID').skip(skipNumber).limit(POST_PER_PAGE)
                 .then(articles =>   res.render('news-list', 
-                    {articles : articles, totalPage : totalPage, currentPage : page})
+                    {articles : articles, totalPage : totalPage, curentPage : page})
                 )
                 .catch(err => {
                     console.log(err);
@@ -213,6 +213,37 @@ module.exports = {
         },
     recruitment: (req, res, next) => {
         res.render('recruitment', {title : 'Recruitment List Page'});
-    }
+    },
+    getPostByTags: async (req, res, next) => {
+        let tag = req.params.tag;
+        const POST_PER_PAGE = 6;
+    
+        let page = parseInt(req.query.page) || 1;
+        let totalPage = await Post.find({type : "Article", tags : tag}).countDocuments().then(posts => Math.ceil(posts / POST_PER_PAGE));
+    
+        if(page < 1) {
+            page = 1;
+        }
+        if(page > totalPage) {
+            page = totalPage;
+        }
+        let skipNumber = POST_PER_PAGE * (page - 1);
+    
+        if (totalPage > 0) {
+            await Post.find({type : "Article", tags : tag}).sort({createAt : -1}).populate('authorID').skip(skipNumber).limit(POST_PER_PAGE)
+                .then(articles =>   res.render('news-list', 
+                    {articles : articles, totalPage : totalPage, curentPage : page})
+                )
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).send("Loi server")
+                });
+            return;
+        }
+        else {
+            res.render('news-list', 
+            { articles : [], totalPage : totalPage, curentPage : page})
+        }
+    },
     
 }
