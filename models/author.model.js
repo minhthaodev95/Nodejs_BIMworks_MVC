@@ -41,13 +41,9 @@ let authorSchema = mongoose.Schema({
         enum : ['admin', 'editor', 'author', 'guest'],
         default : 'guest'
     },
-  
+
 });
-   
 
 const Author = mongoose.model('Author', authorSchema);
 
-
 module.exports = Author;
-
-

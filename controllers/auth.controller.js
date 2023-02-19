@@ -3,60 +3,68 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 
 module.exports = {
-    authMiddleware :  async (req, res, next) => {
-    
-        try {
-            let token = req.cookies.token;
-            let hasToken = jwt.verify(token, process.env.SECRET_KEY)
-            if (hasToken) {
-                let accountAdmin = await Author.findById(hasToken._id).then(user => user);
-                req.userAdmin = accountAdmin;
-                next();
-            }
-        } catch (error) {
-            res.redirect('/')
-        }
-    },
+   authMiddleware : async (req, res, next) => {
+       
+       try {
+           let token = req.cookies.token; 
+           let decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+           if (decodedToken) {
+               let accountAdmin = await Author.findById(decodedToken._id).then(user => user);
+               req.userAdmin = accountAdmin;
+               next();
+           }
+       } catch (err) {
+         res.redirect('/');
+       }
+   },
+   
     postLogin: async  (req, res, nested) => {
         let err = [];
-        let username = req.body.username;
-        let password = req.body.password;
-        if(!username) {
-          err.push('Username is not provided')
+    
+        // Collect username and password from body of request
+        let { username, password } = req.body;
+    
+        // Check if both credentials provided
+        if(!username || !password){
+          let msg = !username ? 'Username is not provided' : 'Password is not provided';
+          err.push(msg);
         }
-         if(!password) {
-          err.push('Password is not provided')
-        }
-        if(err.length) {
-          res.render('admin/login_admin' ,{err : err});
+    
+        // If error we render the respective page with errors's array
+        if(err.length != 0) {
+          res.render('admin/login_admin', {err: err});
           return;
         }
+    
+        // Find user based on username with collection Author
         Author.findOne({username: username}).then(user => {
+          // If user not found we redirect back to login page
           if(!user) {
             err.push('Username not found');
-            res.render('admin/login_admin' ,{err : err});
+            res.render('admin/login_admin', {err: err});
             return;
           }
-          
+    
+          // Compare the Cryptographicaly hashed version of password stored against the one in request
           bcrypt.compare(password, user.password, (errs, result) => {
+            
+            // If passwords matches we set cookie token with JWT sign and redirect to admin page
             if(result == true) {
               let  token = jwt.sign({ _id:  user._id }, process.env.SECRET_KEY );
           
               res.cookie('token', token);
               res.redirect('/admin')
             }
+            // Else wrong credential push the error and redirect back
             else {
               err.push('Password mismatch')
-              res.render('admin/login_admin' ,{err : err});
+              res.render('admin/login_admin', {err: err});
               return;
             }
-          })
-          
-          
-      
-        })
-        
-    },
+          })  
+        })    
+      },
+    
     getLogin: (req, res, next) => {
         res.render('admin/login_admin' ,{err : []});
     },
